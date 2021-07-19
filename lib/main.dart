@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:readingcord/src/readingcord.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(ReadingCord());
 }
 
 class MyApp extends StatelessWidget {
