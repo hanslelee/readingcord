@@ -22,28 +22,68 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Container(),
-        title: Text(
-          'Search',
-          style: TextStyle(
-              fontSize: 25, fontWeight: FontWeight.w700, color: Colors.black, letterSpacing: -(29 * 0.015)),
-        ),
-        centerTitle: false,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.list),
-            color: Color(0xFF323232),
-            onPressed: () {},
-            padding: EdgeInsets.all(0.0),
-          )
-        ],
-      ),
+      appBar: tabController.index == 0
+          ? AppBar(
+              leading: null,
+              title: Text(
+                'Search',
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                    letterSpacing: -(29 * 0.015)),
+              ),
+              centerTitle: false,
+              actions: [
+                PopupMenuButton(
+                  // 팝업메뉴버튼 참고
+                  // https://codesinsider.com/flutter-popup-menu-button/
+                    icon: Icon(Icons.add),
+                    onSelected: (value) {
+                      // setState(() {
+                      //   _value = value;
+                      // });
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        child: Text("구글북스"),
+                        value: 1,
+                      ),
+                      PopupMenuItem(
+                        child: Text("알라딘"),
+                        value: 2,
+                      ),
+                      PopupMenuItem(
+                        child: Text("바코드 인식"),
+                        value: 3,
+                      ),
+                      PopupMenuItem(
+                        child: Text("직접 입력"),
+                        value: 4,
+                      )
+                    ],
+                    padding: EdgeInsets.all(0.0),
+                ),
+                // IconButton(
+                //   icon: Icon(Icons.add),
+                //   color: Color(0xFF323232),
+                //   onPressed: () {},
+                //   padding: EdgeInsets.all(0.0),
+                // ),
+                IconButton(
+                  icon: Icon(Icons.list),
+                  color: Color(0xFF323232),
+                  onPressed: () {},
+                  padding: EdgeInsets.all(0.0),
+                )
+              ],
+            )
+          : null,
       body: TabBarView(
         controller: tabController,
         physics: NeverScrollableScrollPhysics(),
         children: [
-          Container(),
+          _buildHome(),
           Container(),
           Container(),
           Container(),
@@ -77,6 +117,16 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           color: Colors.black45,
         ),
       ),
+    );
+  }
+
+  SingleChildScrollView _buildHome() {
+    return SingleChildScrollView(
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+        )
+      )
     );
   }
 }
